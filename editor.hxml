@@ -1,0 +1,15 @@
+-cp src
+-cp tests
+-lib tink_core
+-lib tink_hxx
+-lib dom4
+
+-D tink_hxx
+
+-lib travix
+
+-main RunTests
+
+-neko test.n
+
+-cmd neko test.n

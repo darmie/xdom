@@ -1,0 +1,3 @@
+# @install: lix --silent download "https://github.com/zenturi/dom4/archive/c0480a2345ad8de0b6881903a095321a85621f72.tar.gz" into dom4/0.0.1/github/c0480a2345ad8de0b6881903a095321a85621f72
+-D dom4=0.0.1
+-cp ${HAXESHIM_LIBCACHE}/dom4/0.0.1/github/c0480a2345ad8de0b6881903a095321a85621f72/src
