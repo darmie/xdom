@@ -1,31 +1,25 @@
 package xdom;
 
 import haxe.macro.Expr;
-import haxe.macro.Context;
-import haxe.DynamicAccess;
-
-abstract AttrVal(String) from String to String {
-	@:from static function ofBool(b:Bool):AttrVal
-		return if (b) "" else null;
-}
 
 abstract Root(Xml) from Xml to Xml {
 	public inline function new(?name:String) {
-		if(name != null){
+		if (name != null) {
 			this = Xml.createElement(name);
 		} else {
 			this = Xml.createElement('root');
 		}
 	}
 
-	static public function tag(?root:Root, name:String, attr:Dynamic, ?children:Array<Root>):Root {
+	static public function tag(?root:Root, name:String, attr:Dynamic, ?children:Array<Dynamic>):Dynamic {
+		
 		if (root == null) {
 			root = Xml.createElement(name);
 
 			for (a in Reflect.fields(attr)) {
 				root.set(a, Reflect.field(attr, a));
 			}
-
+			
 			if (children != null)
 				for (child in children) {
 					root.addChild(child);
@@ -37,10 +31,14 @@ abstract Root(Xml) from Xml to Xml {
 			for (a in Reflect.fields(attr)) {
 				child.set(a, Reflect.field(attr, a));
 			}
-
+			
 			if (children != null)
 				for (_child in children) {
-					child.addChild(_child);
+					if(Std.is(_child, String)){
+						child.addChild(Xml.createPCData(_child));
+					} else {
+						child.addChild(_child);
+					}
 				}
 
 			root.addChild(child);
@@ -48,7 +46,6 @@ abstract Root(Xml) from Xml to Xml {
 			return child;
 		}
 	}
-
 
 	public inline function getStyle():Style {
 		return new xdom.utils.CSSAttrParser().parse('${Std.string(this.get("style"))}');
@@ -78,11 +75,11 @@ abstract Root(Xml) from Xml to Xml {
 		return this.exists(attr);
 	}
 
-	public inline function firstChild ():Root {
+	public inline function firstChild():Root {
 		return this.firstChild();
 	}
 
-	public inline function firstElement ():Root {
+	public inline function firstElement():Root {
 		return this.firstElement();
 	}
 
@@ -98,10 +95,10 @@ abstract Root(Xml) from Xml to Xml {
 		this.remove(attr);
 	}
 
-
 	public inline function removeChild(child:Root):Bool {
 		return this.removeChild(child);
 	}
+
 	public inline function set(name:String, attr:String) {
 		this.set(name, attr);
 	}
@@ -112,9 +109,6 @@ abstract Root(Xml) from Xml to Xml {
 
 	public inline function toString():String
 		return this.toString();
-
-
-
 
 	public static inline function createCData(data:String):Root {
 		return Xml.createCData(data);
