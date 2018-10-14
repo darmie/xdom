@@ -45,38 +45,6 @@ class Dom extends tink.hxx.Generator {
 		var children = switch n.children {
 			case null | {value: null | []}: macro null;
 			case v: {
-			// 		switch v {
-			// 			case {pos: p, value: x}: {
-			// 					switch (x) {
-			// 						case s: {
-			// 								for(xs in s){
-			// 									switch xs {
-			// 										case {pos:p, value:CText(xss)}:{
-			// 											trace(xss);
-			// 											var type = haxe.macro.ComplexTypeTools.toType(macro:String);
-			// 											trace(makeChildren(v, type, false));
-			// 										}
-			// 										case _:
-			// 											// trace(x);
-			// 											makeChildren(v, childrenType, false);
-			// 									}
-			// 								}
-			// 								null;
-			// 						}
-			// 						case _:{
-			// 							null;
-			// 						}
-			// 					}
-			// 				}
-			// 			case _: {
-			// 					makeChildren(v, childrenType, false);
-			// 				}
-			// 		}
-			// 	}
-			// case _ => k: {
-			// 		trace(k);
-			// 		null;
-			// 	}
 				makeChildren(v, childrenType, false);
 			}
 		}
