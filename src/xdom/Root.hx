@@ -34,10 +34,10 @@ abstract Root(Xml) from Xml to Xml {
 			
 			if (children != null)
 				for (_child in children) {
-					if(Std.is(_child, String)){
-						child.addChild(Xml.createPCData(_child));
-					} else {
+					if(Std.is(_child, Xml)){
 						child.addChild(_child);
+					} else {
+						child.addChild(Xml.createPCData(_child));
 					}
 				}
 

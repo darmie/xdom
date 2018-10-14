@@ -12,8 +12,7 @@ class RunTests extends haxe.unit.TestCase {
 
 		var backgroundImageUrl = 'http://placehold.it/350x150';
 
-		var x:Root = cast root.update
-			('
+		var x:Root = cast root.update('
       <div class="test" style=${'background-image: url("${backgroundImageUrl}")'}>Hello HXX !!!</div>
     ');
 		assertTrue(x.toString() == root.firstElement().toString());
