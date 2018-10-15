@@ -2,7 +2,8 @@
 -cp tests
 -lib tink_core
 -lib tink_hxx
--lib dom4
+-lib openfl
+-lib lime
 
 -D tink_hxx
 

@@ -2,7 +2,21 @@ package xdom;
 
 import haxe.macro.Expr;
 
+@:forward(
+	addChild,  
+	attributes, 
+	insertChild,
+	exists,
+	remove,
+	removeChild,
+	set,
+	get,
+	toString,
+	parent,
+	nodeName)
 abstract Root(Xml) from Xml to Xml {
+
+
 	public inline function new(?name:String) {
 		if (name != null) {
 			this = Xml.createElement(name);
@@ -55,24 +69,16 @@ abstract Root(Xml) from Xml to Xml {
 		return this.firstChild();
 	}
 
-	public inline function addChild(child:Root) {
-		this.addChild(child);
+	public inline function addContent(content:String) {
+		this.addChild(Xml.createPCData(content));
 	}
 
 	public inline function elements():Iterator<Root> {
 		return this.elements();
 	}
 
-	public inline function attributes():Iterator<String> {
-		return this.attributes();
-	}
-
 	public inline function elementsNamed(name:String):Iterator<Root> {
 		return this.elementsNamed(name);
-	}
-
-	public inline function exists(attr:String):Bool {
-		return this.exists(attr);
 	}
 
 	public inline function firstChild():Root {
@@ -83,32 +89,9 @@ abstract Root(Xml) from Xml to Xml {
 		return this.firstElement();
 	}
 
-	public inline function insertChild(child:Root, pos:Int) {
-		this.insertChild(child, pos);
-	}
-
 	public inline function iterator():Iterator<Root> {
 		return this.iterator();
 	}
-
-	public inline function remove(attr:String) {
-		this.remove(attr);
-	}
-
-	public inline function removeChild(child:Root):Bool {
-		return this.removeChild(child);
-	}
-
-	public inline function set(name:String, attr:String) {
-		this.set(name, attr);
-	}
-
-	public inline function get(name:String):String {
-		return this.get(name);
-	}
-
-	public inline function toString():String
-		return this.toString();
 
 	public static inline function createCData(data:String):Root {
 		return Xml.createCData(data);

@@ -1,9 +1,5 @@
 package;
 
-import xdom.Root;
-import dom4.*;
-
-using StringTools;
 using xdom.Root;
 
 class RunTests extends haxe.unit.TestCase {
@@ -11,6 +7,8 @@ class RunTests extends haxe.unit.TestCase {
 		var root = new xdom.Root();
 
 		var backgroundImageUrl = 'http://placehold.it/350x150';
+
+		// var base = new xdom.Base();
 
 		var x:Root = cast root.update('
       <div class="test" style=${'background-image: url("${backgroundImageUrl}")'}>Hello HXX !!!</div>
